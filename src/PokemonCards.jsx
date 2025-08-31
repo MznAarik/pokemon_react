@@ -99,11 +99,11 @@ export const PokemonCards = ({ data }) => {
             <div className="grid grid-cols-3 w-full overflow-visible" >
               {console.log(data)}
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
-                Experience:<br /> {data.base_experience}</p>
+                {data.base_experience}  Experience</p>
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
-                Attack: <br /> {data.stats[1].base_stat}</p>
+                {data.stats[1].base_stat} <br />  Attack</p>
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
-                Abilities: {data.abilities.map(a => a.ability.name).join(", ")}
+                {data?.abilities[0]?.ability?.name} Ability
               </p>
 
             </div>
