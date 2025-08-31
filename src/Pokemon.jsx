@@ -1,6 +1,61 @@
+import { useEffect, useState } from "react"
+import { PokemonCards } from "./PokemonCards"
+import "./index.css"
+import { loaders } from "./components/Loaders"
 
 export const Pokemon = () => {
-  return (
-    <h1 className='text-red-500 text-3xl text-center '>Hello Pikachu!!</h1>
-  )
+    const [pokemon, setPokemon] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    const API = "https://pokeapi.co/api/v2/pokemon?limit=50"
+
+    const fetchPokemon = async () => {
+        try {
+            const res = await fetch(API)
+            const data = await res.json()
+            
+            const pokemonDetails = await Promise.all(
+                data.results.map(async (curr) => {
+                    const res = await fetch(curr.url)
+                    return await res.json()
+                })
+            )
+            setTimeout(() => {
+                setPokemon(pokemonDetails)
+                setLoading(false)
+            }, 1000)
+        } catch (error) {
+            console.error("Failed to fetch Pokemon data:", error)
+            setLoading(false)
+            setError("Unable to load Pokemon. Please try again later.")
+        }
+    }
+
+    useEffect(() => {
+        fetchPokemon()
+    }, [])
+
+    if (loading) {
+        return (
+            <div className="loading flex justify-center items-center h-screen bg-gray-500">
+                {loaders()}
+            </div>
+        )
+    }
+    
+    return (
+        <div className="min-h-screen bg-gray-500 flex flex-col items-center p-6">
+            <header className="mb-8">
+                <h1 className="text-center text-white text-4xl font-bold">
+                    Pokemons!
+                </h1>
+            </header>
+
+            <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+                {pokemon.map((poke) => (
+                    <PokemonCards key={poke.id} data={poke} />
+                ))}
+            </ul>
+        </div>
+    )
 }
