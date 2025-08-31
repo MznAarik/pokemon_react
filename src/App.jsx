@@ -1,8 +1,12 @@
+import { Toaster } from "react-hot-toast"
 import { Pokemon } from "./Pokemon"
 
 export const App = () => {
   return (
-    <Pokemon />
+    <>
+      <Toaster position='top-right' reverseOrder={false} />
+      <Pokemon />
+    </>
   )
 }
 
