@@ -25,8 +25,9 @@ export const Pokemon = () => {
                 setLoading(false)
             }, 1000)
         } catch (error) {
-            console.log(error)
+            console.error("Failed to fetch Pokemon data:", error)
             setLoading(false)
+            setError("Unable to load Pokemon. Please try again later.")
         }
     }
 
