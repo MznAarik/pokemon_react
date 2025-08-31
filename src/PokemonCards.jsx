@@ -93,7 +93,6 @@ export const PokemonCards = ({ data }) => {
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
                 Weight: {data.weight}</p>
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
-                {console.log(data)}
                 Speed: {data.stats[5].base_stat}</p>
             </div>
 
