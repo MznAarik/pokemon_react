@@ -28,7 +28,7 @@ export const Pokemon = () => {
             }, 1000)
         } catch (e) {
             setLoading(false)
-            toast.error("Failed to fetch Pokemon data" + e);
+            toast.error(`Failed to fetch Pokemon data: ${e.message}`);
         }
     }
 
