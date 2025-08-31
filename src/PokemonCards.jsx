@@ -11,12 +11,12 @@ export const PokemonCards = ({ data }) => {
     normal: 'from-gray-400 to-gray-600',
     fire: 'from-red-400 to-orange-600',
     water: 'from-blue-400 to-cyan-600',
-    electric: 'from-yellow-300 to-yellow-500',
+    electric: 'from-yellow-500 to-lime-900',
     grass: 'from-green-400 to-emerald-600',
     ice: 'from-cyan-300 to-blue-400',
     fighting: 'from-red-600 to-red-800',
     poison: 'from-purple-400 to-purple-600',
-    ground: 'from-yellow-600 to-brown-500',
+    ground: 'from-yellow-600 to-zinc-500',
     flying: 'from-indigo-300 to-blue-400',
     psychic: 'from-pink-400 to-purple-500',
     bug: 'from-green-500 to-lime-600',
@@ -36,7 +36,7 @@ export const PokemonCards = ({ data }) => {
       <div className={`absolute -inset-0.5 bg-gradient-to-r ${gradientClass} rounded-tl-xl rounded-br-xl blur opacity-30 group-hover:opacity-60 transition duration-500 group-hover:duration-200 animate-pulse`}></div>
 
       {/* Main card */}
-      <div className="relative bg-white rounded-tl-4xl rounded-br-4xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:rotate-1 cursor-pointer overflow-hidden">
+      <div className="gap-4 w-full relative bg-white rounded-tl-4xl rounded-br-4xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:rotate-1 cursor-pointer overflow-hidden">
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className={`h-full w-full bg-gradient-to-br ${gradientClass}`}></div>
@@ -89,13 +89,24 @@ export const PokemonCards = ({ data }) => {
 
             <div className="grid grid-cols-3 w-full" >
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
-                Height: {data.height}</p>
+                Height: <br />{data.height}</p>
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
-                Weight: {data.weight}</p>
+                Weight:<br /> {data.weight}</p>
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
-                Speed: {data.stats[5].base_stat}</p>
+                Speed: <br /> {data.stats[5].base_stat}</p>
             </div>
 
+            <div className="grid grid-cols-3 w-full overflow-visible" >
+              {console.log(data)}
+              <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
+                Experience:<br /> {data.base_experience}</p>
+              <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
+                Attack: <br /> {data.stats[1].base_stat}</p>
+              <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
+                Abilities: {data.abilities.map(a => a.ability.name).join(", ")}
+              </p>
+
+            </div>
 
           </div>
         </div>

@@ -2,18 +2,19 @@ import { useEffect, useState } from "react"
 import { PokemonCards } from "./PokemonCards"
 import "./index.css"
 import { loaders } from "./components/Loaders"
+import toast from "react-hot-toast"
 
 export const Pokemon = () => {
     const [pokemon, setPokemon] = useState([])
     const [loading, setLoading] = useState(true)
 
-    const API = "https://pokeapi.co/api/v2/pokemon?limit=50"
+    const API = "https://pokeapi.co/api/v2/pokemon?limit=28"
 
     const fetchPokemon = async () => {
         try {
             const res = await fetch(API)
             const data = await res.json()
-            
+
             const pokemonDetails = await Promise.all(
                 data.results.map(async (curr) => {
                     const res = await fetch(curr.url)
@@ -22,12 +23,12 @@ export const Pokemon = () => {
             )
             setTimeout(() => {
                 setPokemon(pokemonDetails)
+                toast.success("Success!")
                 setLoading(false)
             }, 1000)
-        } catch (error) {
-            console.error("Failed to fetch Pokemon data:", error)
+        } catch (e) {
             setLoading(false)
-            setError("Unable to load Pokemon. Please try again later.")
+            toast.error("Failed to fetch Pokemon data" + e);
         }
     }
 
@@ -42,7 +43,7 @@ export const Pokemon = () => {
             </div>
         )
     }
-    
+
     return (
         <div className="min-h-screen bg-gray-500 flex flex-col items-center p-6">
             <header className="mb-8">
@@ -51,7 +52,7 @@ export const Pokemon = () => {
                 </h1>
             </header>
 
-            <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+            <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-[90rem]">
                 {pokemon.map((poke) => (
                     <PokemonCards key={poke.id} data={poke} />
                 ))}
