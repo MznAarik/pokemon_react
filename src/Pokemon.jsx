@@ -12,7 +12,6 @@ export const Pokemon = () => {
 
     const API = "https://pokeapi.co/api/v2/pokemon?limit=100"
 
-    document.title = 'List of Pokemons!'
 
     const fetchPokemon = async () => {
         try {
@@ -37,6 +36,7 @@ export const Pokemon = () => {
     }
 
     useEffect(() => {
+        document.title = 'List of Pokemons!'
         fetchPokemon()
     }, [])
 
