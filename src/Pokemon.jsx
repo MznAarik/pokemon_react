@@ -58,13 +58,16 @@ export const Pokemon = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-500 flex flex-col items-center p-6">
+        <div className="min-h-screen bg-gray-500 p-6 flex flex-col items-center">
+            {/* Header */}
             <header className="mb-8">
                 <h1 className="text-center text-white text-4xl font-bold">
                     Pokémons!
                 </h1>
             </header>
-            <div className="relative mb-10">
+
+            {/* Search Input */}
+            <div className="relative mb-10 w-fit max-w-md">
                 <input
                     type="text"
                     placeholder="Search Pokémons!"
@@ -75,13 +78,13 @@ export const Pokemon = () => {
                 <SearchIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
 
-
-            <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-[90rem]">
-                {/* {pokemon.map((poke) => ( */}
+            {/* Pokémon Cards */}
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-[90rem]">
                 {searchData.map((poke) => (
                     <PokemonCards key={poke.id} data={poke} />
                 ))}
             </ul>
         </div>
-    )
+    );
+
 }
