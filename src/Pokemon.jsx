@@ -3,7 +3,7 @@ import { PokemonCards } from "./PokemonCards"
 import "./index.css"
 import { loaders } from "./components/Loaders"
 import toast from "react-hot-toast"
-// import SearchIcon from "@mui/icons-material/Search";
+import SearchIcon from "@mui/icons-material/Search";
 
 export const Pokemon = () => {
     const [pokemon, setPokemon] = useState([])
@@ -11,6 +11,7 @@ export const Pokemon = () => {
     const [search, setSearch] = useState("")
 
     const API = "https://pokeapi.co/api/v2/pokemon?limit=100"
+
 
     const fetchPokemon = async () => {
         try {
@@ -35,13 +36,14 @@ export const Pokemon = () => {
     }
 
     useEffect(() => {
+        document.title = 'List of Pokemons!'
         fetchPokemon()
     }, [])
 
     //Search Functionality
-    const searchData = pokemon.filter((curr)=>{
+    const searchData = pokemon.filter((curr) => {
         const nameMatch = curr.name.toLowerCase().includes(search.toLowerCase());
-        const types = curr.types.map(t=>t.type.name.toLowerCase()).join(' ');
+        const types = curr.types.map(t => t.type.name.toLowerCase()).join(' ');
         const typeMatch = types.includes(search.toLowerCase())
 
         return nameMatch || typeMatch
@@ -56,25 +58,33 @@ export const Pokemon = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-500 flex flex-col items-center p-6">
+        <div className="min-h-screen bg-gray-500 p-6 flex flex-col items-center">
+            {/* Header */}
             <header className="mb-8">
                 <h1 className="text-center text-white text-4xl font-bold">
                     Pokémons!
                 </h1>
             </header>
-            <div className="mb-10 bg-white h-10 rounded-md">
-                {/* <SearchIcon className="text-gray-500" /> */}
-                <input className="h-10 w-full px-3 rounded-md bg-white " type="text" placeholder="Search Pokémons!"
-                    value={search} onChange={(e) => setSearch(e.target.value)}
+
+            {/* Search Input */}
+            <div className="relative mb-10 w-fit max-w-md">
+                <input
+                    type="text"
+                    placeholder="Search Pokémons!"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="h-10 w-full px-10 rounded-md bg-white border border-gray-300 focus:outline-none"
                 />
+                <SearchIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
 
-            <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-[90rem]">
-                {/* {pokemon.map((poke) => ( */}
+            {/* Pokémon Cards */}
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-[90rem]">
                 {searchData.map((poke) => (
                     <PokemonCards key={poke.id} data={poke} />
                 ))}
             </ul>
         </div>
-    )
+    );
+
 }
