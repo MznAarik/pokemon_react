@@ -103,7 +103,7 @@ export const PokemonCards = ({ data }) => {
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
                 {data.stats[1].base_stat} <br />  Attack</p>
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
-                {data?.abilities[0]?.ability?.name} Ability
+                {data?.abilities?.[0]?.ability?.name || 'Unknown'} Ability
               </p>
 
             </div>
