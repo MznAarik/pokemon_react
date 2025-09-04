@@ -97,7 +97,6 @@ export const PokemonCards = ({ data }) => {
             </div>
 
             <div className="grid grid-cols-3 w-full overflow-visible" >
-              {console.log(data)}
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
                 {data.base_experience}  Experience</p>
               <p className={`me-2 mb-2 font-bold bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent`}>
